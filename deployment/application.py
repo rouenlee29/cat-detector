@@ -1,77 +1,47 @@
-https://github.com/mohshawky5193/dog-breed-classifier/blob/master/dog-breed-classifier.py
-deployed at https://dog-breed-classifier-udacity.herokuapp.com/
+#https://github.com/mohshawky5193/dog-breed-classifier/blob/master/web-app/web-app-classifier.py
+#deployed at https://dog-breed-classifier-udacity.herokuapp.com/
 
+from flask import Flask,request,jsonify,render_template
 from fastai.basic_train import load_learner
 from fastai.vision import open_image
 import torch
 from PIL import Image 
 
-
-async def get_bytes(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            return await response.read()
-
-
-app = Starlette()
+app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
-async def homepage(request):
-    template = "index.html"
-    context = {"request": request}
-    return templates.TemplateResponse(template, context)
+def render_page():
+    return render_template('cat-breed-detector.html')
 
-# for user to upload image 
-@app.route("/upload", methods=["POST"])
-async def upload(request):
-    data = await request.form()
-    bytes = await (data["file"].read())
-    return predict_image_from_bytes(bytes)
-
-# @app.route("/classify-url", methods=["GET"])
-# async def classify_url(request):
-#     bytes = await get_bytes(request.query_params["url"])
-#     return predict_image_from_bytes(bytes)
-
-
-def predict_image_from_bytes(bytes):
-    img = open_image(BytesIO(bytes))
-
-    # load model in export.pkl 
+@app.route('/uploadajax',methods=['POST'])
+def upload_file():
+    """
+    retrieve the image uploaded and make sure it is an image file
+    """
+    file = request.files['file']
+    image_extensions=['jpg', 'jpeg', 'png']
+    
+    if file.filename.split('.')[1] not in image_extensions:
+        return jsonify('Please upload an appropriate image file')
+    
+    """
+    Load the trained model in export.pkl 
+    """
     learn = load_learner(path = ".")
-
+    
+    """
+    Perform prediction
+    """
+    image_bytes = file.read()
+    img = Image.open(io.BytesIO(image_bytes))
     pred_class,pred_idx,outputs = learn.predict(img)
     i = pred_idx.item()
     classes = ['Domestic Medium Hair', 'Persian', 'Ragdoll', 'Siamese', 'Snowshoe']
     prediction = classes[i]
     
-    return JSONResponse({
-        "predictions": prediction
-    })
+    return jsonify(f'Your cat is a {prediction}')
+    
+if __name__ == '__main__':
+    app.run(debug=False,port=os.getenv('PORT',5000))
 
 
-@app.route("/")
-def form(request):
-    return HTMLResponse(
-        """
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            Select image to upload:
-            <input type="file" name="file">
-            <input type="submit" value="Upload Image">
-        </form>
-        Or submit a URL:
-        <form action="/classify-url" method="get">
-            <input type="url" name="url">
-            <input type="submit" value="Fetch and analyze image">
-        </form>
-    """)
-
-
-@app.route("/form")
-def redirect_to_homepage(request):
-    return RedirectResponse("/")
-
-
-if __name__ == "__main__":
-    if "serve" in sys.argv:
-        uvicorn.run(app, host="0.0.0.0", port=8008)

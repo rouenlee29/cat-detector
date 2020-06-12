@@ -1,6 +1,8 @@
 #https://github.com/mohshawky5193/dog-breed-classifier/blob/master/web-app/web-app-classifier.py
 #deployed at https://dog-breed-classifier-udacity.herokuapp.com/
 
+import os
+import io
 from flask import Flask,request,jsonify,render_template
 from fastai.basic_train import load_learner
 from fastai.vision import open_image
@@ -32,8 +34,11 @@ def upload_file():
     """
     Perform prediction
     """
-    image_bytes = file.read()
-    img = Image.open(io.BytesIO(image_bytes))
+    #image_bytes = file.read()
+    #img = Image.open(io.BytesIO(image_bytes))
+    
+    img = open_image(file)
+    
     pred_class,pred_idx,outputs = learn.predict(img)
     i = pred_idx.item()
     classes = ['Domestic Medium Hair', 'Persian', 'Ragdoll', 'Siamese', 'Snowshoe']

@@ -1,19 +1,19 @@
 html {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
 }
 
 body {
     margin: 0;
-    background-color: #45cc8f;
+    background-color: rgb(255, 255, 255);
 }
 
 input[type="submit"] {
     display: block;
     border-radius: 5px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
     font-size :100%;
-    border-color:#6ed173;
-    background-color :#00ff00;
+    border-color:#F5F4F0;
+    background-color :rgba(10, 196, 221, 0.938);
     color : #fff;
     width: 40%;
     margin: 5px auto;
@@ -29,12 +29,12 @@ input[type="submit"] {
     float: left;
     text-decoration: none;
     text-align: center;
-    color:#fff;
+    color:rgb(12, 12, 12);
     padding:10px;
 }
 
 .nav-site a:hover {
-    background-color: #41cc48;
+    background-color: #4189cc;
 }
 
 .container {
@@ -53,7 +53,7 @@ input[type="submit"] {
 }
 
 h1,p,ol,h3{
-    color: #fff;
+    color:rgb(12, 12, 12);
     text-align: center;
 }
 h3 {
@@ -71,7 +71,7 @@ ol li {
     margin-top:10px;
     color: #fff;
     width: 50%;
-    background-color: #18724e;
+    background-color: #1c5de7;
     display: inline-block;
     cursor: pointer;
     padding: 3px;
@@ -88,17 +88,17 @@ ol li {
     height: 16px;
 }
 #result h3 {
-    color: #fff;
+    color: rgb(0, 0, 0);
 }
 
 ul li {
     text-align: center;
     list-style: none;
-    color: #fff;
+    color: rgb(0, 0, 0);
     margin-bottom:20px;
 }
 ul li a {
     text-decoration: none;
-    color:#fff;
+    color:rgb(0, 0, 0);
     
 }

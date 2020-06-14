@@ -9,12 +9,8 @@
         <script src="{{ url_for('static', filename='js/javascript.js') }}"></script>
     </head>
     <body>
-        <nav class="nav-site">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-        </nav>
         <h1>Cat Breed Classifier</h1>
-        <p> Tells you which of the following breed that your cat resembles the most:</p>
+        <p> If your cat might be one of the following breeds:</p>
         <ul>
             <li>Domestic Medium Hair</li>
             <li>Persian</li>
@@ -22,6 +18,7 @@
             <li>Siamese</li>
             <li>Snowshoe</li>
         </ul>
+        <p> But you are not sure which one, submit a photo of your cat and let an AI algorithm decide!</p>
         <div class="container">
             <form  id="formId" enctype="multipart/form-data">
                 <input type="file" class="inputFile" name="file" id="fileId" accept="image/*">

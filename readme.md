@@ -1,31 +1,20 @@
 ## Goal
-Create algorithm to detect cat breed
+Use fast.ai to detect one of the follwing cat breeds:
 
-## Data
-I used the [cat breed dataset from kaggle](https://www.kaggle.com/ma7555/cat-breeds-dataset). 
+- Domestic Medium Hair
+- Persian
+- Ragdoll
+- Siamese
+- Snowshoe
 
-However, the dataset came with a few challenges:
-1. Imbalanced data
-    - There are 53,027 images for "Domestic Short Hair" breed. Most breeds have less than 1,000 images
+## Files
 
-2. Incorrect images (?)
-    - Admittedly, I am no cat expert, but few images for  "Munchkin" seem to be incorrect
+- `cat_breed_detector-v3.ipynb` : Development of model
+- `cat_detector_tools.py` : Helper functions to develop model 
+- `development` directory: contains files needed to deploy on Heroku 
 
-> Munchkin??
-
-![](doc_images/no_munchkin.jpg)
-
-> Munchkin??
-
-![](doc_images/no_munchkin2.jpg)
-
-
-## Notebooks
-
-
-
-`cat_breed_detector-v0.1.ipynb`: Pilot run with [cat breed dataset from kaggle](https://www.kaggle.com/ma7555/cat-breeds-dataset)
-
-`cat_breed_detector-v0.0.ipynb`: Second run on the same dataset, with oversampling.  
-
-`cat_breed_detector-v0.1.ipynb`
+I have also written a [blog post](https://www.notion.so/Deep-learning-for-a-cat-I-miss-5a4162ef02e1464992f733d578a61ed6) on this project, which includes: 
+- Installation of relevant libraries
+- Scraping data
+- Model training
+- Deployment to Heroku (for free), result can be found [here](https://cat-detector-app.herokuapp.com/).
